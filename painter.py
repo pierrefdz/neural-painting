@@ -75,7 +75,6 @@ class PainterBase():
             print('pre-trained renderer does not exist...')
             exit()
 
-
     def _compute_acc(self):
 
         target = self.img_batch.detach()
@@ -98,7 +97,6 @@ class PainterBase():
             self.output_dir, self.img_path.split('/')[-1][:-4])
         np.savez(file_name + '_strokes.npz', x_ctt=x_ctt,
                  x_color=x_color, x_alpha=x_alpha)
-
 
     def _save_rendered_images(self):
 
@@ -130,9 +128,6 @@ class PainterBase():
             frame = cv2.resize(frame, (out_w, out_h), cv2.INTER_AREA)
             video_writer.write(frame)
 
-
-
-
     def _normalize_strokes(self, v):
 
         v = np.array(v.detach().cpu())
@@ -162,7 +157,6 @@ class PainterBase():
 
         return v
 
-
     def initialize_params(self):
 
         self.x_ctt = np.random.rand(
@@ -179,7 +173,6 @@ class PainterBase():
             self.m_grid*self.m_grid, self.m_strokes_per_block,
             self.rderr.d_alpha).astype(np.float32)
         self.x_alpha = torch.tensor(self.x_alpha).to(device)
-
 
     def stroke_sampler(self, anchor_id):
 
@@ -205,7 +198,6 @@ class PainterBase():
                 self.rderr.stroke_params[self.rderr.d_shape:self.rderr.d_shape+self.rderr.d_color])
             self.x_alpha.data[i, anchor_id, :] = torch.tensor(self.rderr.stroke_params[-1])
 
-
     def _backward_x(self):
 
         self.G_loss = 0
@@ -215,7 +207,6 @@ class PainterBase():
             self.G_loss += self.args.beta_ot * self._sinkhorn_loss(
                 self.G_final_pred_canvas, self.img_batch)
         self.G_loss.backward()
-
 
     def _forward_pass(self):
 
@@ -265,7 +256,6 @@ class Painter(PainterBase):
 
         self.final_rendered_images = None
 
-
     def _drawing_step_states(self):
         acc = self._compute_acc().item()
         print('iteration step %d, G_loss: %.5f, step_psnr: %.5f, strokes: %d / %d'
@@ -277,10 +267,11 @@ class Painter(PainterBase):
             pass
         else:
             cv2.imshow('G_pred', vis2[:,:,::-1])
-            cv2.imshow('input', self.img_[:, :, ::-1])
+            #cv2.imshow('input', self.img_[:, :, ::-1])
             #plt.imshow(cv2.cvtColor(vis2[:,:,::-1], cv2.COLOR_BGR2RGB))
             #plt.imshow(cv2.cvtColor(self.img_[:, :, ::-1], cv2.COLOR_BGR2RGB))
             cv2.waitKey(1)
+        return vis2
 
     def _render_on_grids(self, v):
 
@@ -321,8 +312,6 @@ class ProgressivePainter(PainterBase):
         self.input_aspect_ratio = self.img_.shape[0] / self.img_.shape[1]
         self.img_ = cv2.resize(self.img_, (128 * args.max_divide, 128 * args.max_divide), cv2.INTER_AREA)
 
-
-
     def _render(self, v):
 
         v = v[0,:,:]
@@ -339,7 +328,6 @@ class ProgressivePainter(PainterBase):
 
         return rendered_imgs
 
-
     def stroke_parser(self):
 
         total_blocks = 0
@@ -347,7 +335,6 @@ class ProgressivePainter(PainterBase):
             total_blocks += i ** 2
 
         return int(self.max_m_strokes / total_blocks)
-
 
     def _drawing_step_states(self):
         acc = self._compute_acc().item()
@@ -360,7 +347,7 @@ class ProgressivePainter(PainterBase):
             pass
         else:
             cv2.imshow('G_pred', vis2[:,:,::-1])
-            cv2.imshow('input', self.img_[:, :, ::-1])
+            #cv2.imshow('input', self.img_[:, :, ::-1])
             #plt.imshow(cv2.cvtColor(vis2[:,:,::-1], cv2.COLOR_BGR2RGB))
             #plt.imshow(cv2.cvtColor(self.img_[:, :, ::-1], cv2.COLOR_BGR2RGB))
             cv2.waitKey(1)
@@ -410,7 +397,7 @@ class NeuralStyleTransfer(PainterBase):
             pass
         else:
             cv2.imshow('G_pred', vis2[:,:,::-1])
-            cv2.imshow('input', self.img_[:, :, ::-1])
+            # cv2.imshow('input', self.img_[:, :, ::-1])
             #plt.imshow(cv2.cvtColor(vis2[:,:,::-1], cv2.COLOR_BGR2RGB))
             #plt.imshow(cv2.cvtColor(self.img_[:, :, ::-1], cv2.COLOR_BGR2RGB))
             cv2.waitKey(1)

@@ -11,7 +11,7 @@ parser.add_argument('--renderer', type=str, default='oilpaintbrush', metavar='st
                          'bezier, circle, square, rectangle] (default ...)')
 parser.add_argument('--batch_size', type=int, default=64, metavar='N',
                     help='input batch size for training (default: 4)')
-parser.add_argument('--print_models', action='store_true', default=False,
+parser.add_argument('--print_models', action='store_true', default=True,
                     help='visualize and print networks')
 parser.add_argument('--net_G', type=str, default='zou-fusion-net', metavar='str',
                     help='net_G: plain-dcgan or plain-unet or huang-net or zou-fusion-net')
@@ -34,7 +34,7 @@ if __name__ == '__main__':
 
     # # How to check if the data is loading correctly?
     # dataloaders = utils.get_renderer_loaders(args)
-    # for i in range(100):
+    # for i in range(2):
     #     data = next(iter(dataloaders['train']))
     #     vis_A = data['A']
     #     vis_B = utils.make_numpy_grid(data['B'])

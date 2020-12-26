@@ -6,7 +6,9 @@ import utils
 import matplotlib.pyplot as plt
 
 
-def _random_floats(low, high, size):
+def _random_floats(low, high, size, seed=None):
+    if seed is not None:
+        random.seed(seed)
     return [random.uniform(low, high) for _ in range(size)]
 
 
@@ -70,8 +72,8 @@ class Renderer():
                 [self.CANVAS_WIDTH, self.CANVAS_WIDTH, 3]).astype('float32')
 
 
-    def random_stroke_params(self):
-        self.stroke_params = np.array(_random_floats(0, 1, self.d), dtype=np.float32)
+    def random_stroke_params(self, seed=None):
+        self.stroke_params = np.array(_random_floats(0, 1, self.d, seed=seed), dtype=np.float32)
 
     def random_stroke_params_sampler(self, err_map, img):
 

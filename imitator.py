@@ -83,7 +83,7 @@ class Imitator():
         # visualize models with the package torchviz
         data = next(iter(self.dataloaders['train']))
         y = self.net_G(data['A'].to(device))
-        mygraph = make_dot(y.mean(), params=dict(self.net_G.named_parameters()))
+        mygraph = make_dot(y[0].mean(), params=dict(self.net_G.named_parameters()))
         mygraph.render('G')
 
 
