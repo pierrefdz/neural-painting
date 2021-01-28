@@ -157,8 +157,9 @@ class PainterBase():
 
         return v
 
-    def initialize_params(self):
-
+    def initialize_params(self, seed=None):
+        if seed is not None:
+            np.random.seed(seed)
         self.x_ctt = np.random.rand(
             self.m_grid*self.m_grid, self.m_strokes_per_block,
             self.rderr.d_shape).astype(np.float32)

@@ -11,7 +11,7 @@ parser.add_argument('--renderer', type=str, default='oilpaintbrush', metavar='st
                          'bezier, circle, square, rectangle] (default ...)')
 parser.add_argument('--batch_size', type=int, default=64, metavar='N',
                     help='input batch size for training (default: 4)')
-parser.add_argument('--print_models', action='store_true', default=True,
+parser.add_argument('--print_models', action='store_true', default=False,
                     help='visualize and print networks')
 parser.add_argument('--net_G', type=str, default='zou-fusion-net', metavar='str',
                     help='net_G: plain-dcgan or plain-unet or huang-net or zou-fusion-net')

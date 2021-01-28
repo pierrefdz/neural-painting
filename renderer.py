@@ -11,8 +11,9 @@ def _random_floats(low, high, size, seed=None):
         random.seed(seed)
     return [random.uniform(low, high) for _ in range(size)]
 
-
 def _normalize(x, width):
+    """ x is a proportion, width is the canvas width
+    Returns the true position on the canvas"""
     return (int)(x * (width - 1) + 0.5)
 
 
@@ -72,7 +73,7 @@ class Renderer():
                 [self.CANVAS_WIDTH, self.CANVAS_WIDTH, 3]).astype('float32')
 
 
-    def random_stroke_params(self, seed=None):
+ random_stroke_params(self, seed=None):
         self.stroke_params = np.array(_random_floats(0, 1, self.d, seed=seed), dtype=np.float32)
 
     def random_stroke_params_sampler(self, err_map, img):
@@ -127,6 +128,7 @@ class Renderer():
 
 
     def check_stroke(self):
+        """ Checks that the stroke is not too small (?)"""
         r_ = 1.0
         if self.renderer in ['markerpen', 'watercolor']:
             r_ = max(self.stroke_params[6], self.stroke_params[7])

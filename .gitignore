@@ -8,3 +8,7 @@ LICENSE
 **.pdf
 G
 **.mp4
+checkpoints_G/
+output_test_OT/
+**.ipynb
+

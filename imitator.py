@@ -130,7 +130,8 @@ class Imitator():
 
 
     def _compute_acc(self):
-
+        """Accuracy is here the PSNR: https://en.wikipedia.org/wiki/Peak_signal-to-noise_ratio
+        """
         target_foreground = self.batch['B'].to(device).detach()
         target_alpha_map = self.batch['ALPHA'].to(device).detach()
         foreground = self.G_pred_foreground.detach()
