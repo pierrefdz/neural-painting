@@ -73,11 +73,13 @@ class Renderer():
                 [self.CANVAS_WIDTH, self.CANVAS_WIDTH, 3]).astype('float32')
 
 
- random_stroke_params(self, seed=None):
+    def random_stroke_params(self, seed=None):
         self.stroke_params = np.array(_random_floats(0, 1, self.d, seed=seed), dtype=np.float32)
 
     def random_stroke_params_sampler(self, err_map, img):
-
+        """
+        Random stroke parameters according to a probability distribution that makes it more likely to go where there is the highest difference between
+        the target and the current canvas"""
         map_h, map_w, c = img.shape
 
         err_map = cv2.resize(err_map, (self.CANVAS_WIDTH, self.CANVAS_WIDTH))

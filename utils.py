@@ -275,7 +275,7 @@ def patches2img(img_batch, m_grid, to_numpy=True):
 
 def create_transformed_brush(brush, canvas_w, canvas_h,
                       x0, y0, w, h, theta, R0, G0, B0, R2, G2, B2):
-
+    """Given the image of the brush and the parameters, output the image of the brush rotated, transformed ..."""
     brush_alpha = np.stack([brush, brush, brush], axis=-1)
     brush_alpha = (brush_alpha > 0).astype(np.float32)
     brush_alpha = (brush_alpha*255).astype(np.uint8)

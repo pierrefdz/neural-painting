@@ -168,6 +168,10 @@ class PainterBase():
         self.x_color = np.random.rand(
             self.m_grid*self.m_grid, self.m_strokes_per_block,
             self.rderr.d_color).astype(np.float32)
+        #TODO If you want monochromatic for MNIST
+        # self.x_color = np.ones((
+        #     self.m_grid*self.m_grid, self.m_strokes_per_block,
+        #     self.rderr.d_color)).astype(np.float32)
         self.x_color = torch.tensor(self.x_color).to(device)
 
         self.x_alpha = np.random.rand(
@@ -281,7 +285,7 @@ class Painter(PainterBase):
         self.rderr.create_empty_canvas()
 
         grid_idx = list(range(self.m_grid ** 2))
-        random.shuffle(grid_idx)
+        #random.shuffle(grid_idx) #TODO not random localisation for strokes
         for j in range(v.shape[1]):  # for each group of stroke
             for i in range(len(grid_idx)):  # for each random patch
                 self.rderr.stroke_params = v[grid_idx[i], j, :]
