@@ -137,7 +137,7 @@ class PainterBase():
             xs = np.array([0, 4])
             ys = np.array([1, 5])
             rs = np.array([6, 7])
-        elif self.rderr.renderer in ['oilpaintbrush', 'rectangle']:
+        elif self.rderr.renderer in ['oilpaintbrush', 'cloudbrush' 'rectangle']:
             # xc, yc, w, h, theta ...
             xs = np.array([0])
             ys = np.array([1])
