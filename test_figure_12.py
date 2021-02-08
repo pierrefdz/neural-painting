@@ -5,13 +5,13 @@ import torch.optim as optim
 
 from painter import *
 
-from datetime import datetime
-now = datetime.now()
-now.strftime("%Y-%m-%d_%H:%M:%S")
+# from datetime import datetime
+# now = datetime.now()
+# now.strftime("%Y-%m-%d_%H:%M:%S") #for extensive test purposes
 
 # settings
 parser = argparse.ArgumentParser(description='STYLIZED NEURAL PAINTING')
-parser.add_argument('--img_path', type=str, default='./test_images/babar.jpeg', metavar='str',
+parser.add_argument('--img_path', type=str, default='./test_images/sunflowers.jpg', metavar='str',
                     help='path to test image')
 parser.add_argument('--net_G', type=str, default='zou-fusion-net', metavar='str',
                     help='net_G: plain-dcgan, plain-unet, huang-net, or zou-fusion-net (default: zou-fusion-net)')
@@ -50,7 +50,7 @@ parser.add_argument('--iters_per_stroke', type=int, default=None)
 args = parser.parse_args()
 
 args.with_ot_loss == (args.beta_ot != 0)
-args.output_dir = args.output_dir + f"/beta_ot={args.beta_ot}_beta_L1={args.beta_L1}_{now}"
+# args.output_dir = args.output_dir + f"/beta_ot={args.beta_ot}_beta_L1={args.beta_L1}_{now}" #for extensive test purposes
 
 print(args)
 

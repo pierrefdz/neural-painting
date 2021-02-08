@@ -1,3 +1,9 @@
 LICENSE
 **.pdf
 **.mp4
+**.pyc
+**.zip
+**.ipynb
+**.pt
+.DS_Store
+**.npz
