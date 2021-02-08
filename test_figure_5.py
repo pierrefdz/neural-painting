@@ -15,7 +15,7 @@ parser = argparse.ArgumentParser(description='STYLIZED NEURAL PAINTING')
 
 parser.add_argument('--max_m_strokes', type=int, default=1)
 parser.add_argument('--m_grid', type=int, default=1)
-parser.add_argument('--canvas_color', type=str, default='white')
+parser.add_argument('--canvas_color', type=str, default='black')
 parser.add_argument('--canvas_size', type=int, default=512)
 parser.add_argument('--net_G', type=str, default='zou-fusion-net', metavar='str',
                     help='net_G: plain-dcgan, plain-unet, huang-net, or zou-fusion-net (default: zou-fusion-net)')
@@ -57,7 +57,7 @@ if os.path.exists(f'./output_test_OT/') is False:
     os.mkdir(f'./output_test_OT/')
 if os.path.exists(directory) is False:    
     os.mkdir(directory)
-rd = Renderer(renderer=args.renderer, canvas_color='white')
+rd = Renderer(renderer=args.renderer, canvas_color='black')
 rd.random_stroke_params(seed=seed)
 rd.draw_stroke()
 
