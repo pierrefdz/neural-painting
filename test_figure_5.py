@@ -91,7 +91,7 @@ def optimize_x(pt):
                        '.png', cv2.cvtColor(image_0[:,:,::-1], cv2.COLOR_BGR2RGB))
 
     for pt.anchor_id in range(0, pt.m_strokes_per_block):
-        #pt.stroke_sampler(pt.anchor_id)
+        pt.stroke_sampler(pt.anchor_id)
         iters_per_stroke = 20
         if pt.anchor_id == pt.m_strokes_per_block - 1:
             iters_per_stroke = 40
