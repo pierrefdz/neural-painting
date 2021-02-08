@@ -62,7 +62,7 @@ rd.random_stroke_params(seed=seed)
 rd.draw_stroke()
 
 plt.imsave(directory+'reference.png', rd.canvas) # File is saved in 'test_images'
-plt.imsave(directory+'reference2.png', cv2.cvtColor(rd.canvas, cv2.COLOR_BGR2RGB)) # File is saved in 'test_images'
+
 ## ________________________________________________________________________________________
 # Decide which device we want to run on
 
@@ -105,7 +105,10 @@ def optimize_x(pt):
             pt.x_color.data = torch.clamp(pt.x_color.data, 0, 1)
             pt.x_alpha.data = torch.clamp(pt.x_alpha.data, 0, 1)
 
-            pt.G_pred_canvas = torch.ones(args.m_grid ** 2, 3, 128, 128).to(device)
+            if args.canvas_color == 'white':
+                pt.G_pred_canvas = torch.ones([args.m_grid ** 2, 3, 128, 128]).to(device)
+            else:
+                pt.G_pred_canvas = torch.zeros(args.m_grid ** 2, 3, 128, 128).to(device)
 
             pt._forward_pass()
             image_i = pt._drawing_step_states()
