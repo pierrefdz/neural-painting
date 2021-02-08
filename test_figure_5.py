@@ -53,6 +53,8 @@ args.img_path = directory+'reference.png'
 
 seed = 10      #To have the same image each time
 
+if os.path.exists(f'./output_test_OT/') is False:    
+    os.mkdir(f'./output_test_OT/')
 if os.path.exists(directory) is False:    
     os.mkdir(directory)
 rd = Renderer(renderer=args.renderer, canvas_color='white')
